@@ -1,19 +1,15 @@
 <?php 
 
-require_once("Livreclasse.php"); 
 
-$l1 = new Livre(1, "Algo selon H2PROG", 300, "algo.png");
-$l2 = new Livre(2, "La France", 200, "france.png");
-$l3 = new Livre(3, "JS", 500, "JS.png");
-$l4 = new Livre(4, "Virus asiatique", 100, "virus.png");
+require_once("controllers/LivreController.php"); 
 
-$livres = [$l1, $l2, $l3, $l4];
-//var_dump($livres) ;
+//$livreManager = new LivreManager();
+// $livreManager->chargementLivres();
 
 ob_start(); ?> 
 
 <!-- Tableau des livres --> 
-<table class="table table-hover text-center">
+<table class="table table-hover text-center border border-success">
     <thead>
         <!-- Titres des colonnes --> 
         <tr class="table-success">
@@ -26,9 +22,10 @@ ob_start(); ?>
     
     <tbody>
         <!-- Contenu des colonnes  --> 
-    <?php foreach($livres as $livre) : ?>
+    <?php 
 
-        <tr class="table-active">
+    foreach($livres as $livre) : ?>
+        <tr class="table-light">
             <td class="align-middle"><img src="./public/images/<?= $livre->getImage() ?>" alt="l'algo" width="60px"></td>
             <td class="align-middle"><?= $livre->getTitre() ?></td>
             <td class="align-middle"><?= $livre->getNbPages() ?></td>
@@ -40,7 +37,9 @@ ob_start(); ?>
     </tbody>
 </table>
 
+<!-- Bouton ajouter livre --> 
 <a href="#" class="btn btn-secondary d-block">Ajouter</a>
+
 
 <?php 
 $content = ob_get_clean();

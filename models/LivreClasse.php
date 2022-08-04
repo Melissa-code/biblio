@@ -2,10 +2,12 @@
 
 class Livre {
 
-    private $id;
-    private $titre;
-    private $nbPages;
-    private $image; 
+    // public static array $livres;
+
+    private int $id;
+    private string $titre;
+    private int $nbPages;
+    private string $image; 
 
 
     public function __construct($id, $titre, $nbPages, $image) {
@@ -13,6 +15,7 @@ class Livre {
         $this->titre = $titre;
         $this->nbPages = $nbPages;
         $this->image = $image;
+        // self::$livres[] = $this;
     }
 
 
