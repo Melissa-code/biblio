@@ -24,8 +24,21 @@ class LivreController {
     public function afficherLivre($id){
         $livre = $this->livreManager->getLivreById($id);
         //var_dump($livre); 
+        //var_dump($id); 
         require("views/afficherLivreView.php");
     }
+
+
+    public function supprimerLivre($id) {
+        $nomImage = $this->livreManager->getLivreById($id)->getImage(); 
+        // suppression de l'image dans le répertoire 
+        unlink("public/images/".$nomImage); 
+        //suppression de l'image en DB 
+        $this->livreManager->supprimerLivreBdd($id);
+        header('location:'.URL."livres");
+    }
+
+
 
     public function ajoutLivre() {
         require("views/ajoutLivreView.php"); 
@@ -64,4 +77,7 @@ class LivreController {
             throw new Exception("l'ajout de l'image n'a pas fonctionné");
         else return ($random."_".$file['name']);
     }
+
+
+
 }

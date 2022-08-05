@@ -8,7 +8,7 @@
     <!-- Thème Bootswatch -->
     <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/style.css">
     <title>Ma bibliothèque en ligne</title>
 </head>
 

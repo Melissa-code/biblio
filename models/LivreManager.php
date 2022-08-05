@@ -34,14 +34,18 @@ class LivreManager extends Model {
         }
     }
 
+
     public function getLivreById($id){
+        //var_dump($id);
         for($i=0; $i < count($this->livres);$i++){
-            if($this->livres[$i]->getId() === $id){
+            //var_dump($this->livres[$i]->getId());
+            if($this->livres[$i]->getId() === (int)base64_decode(urldecode($id))){
                 //var_dump($this->livres[$i]);
                 return $this->livres[$i];
             }
         }
     }
+
 
     public function ajoutLivreBdd($titre, $nbPages, $image) {
         $req = "INSERT INTO livres (titre, nbPages, image) VALUES (:titre, :nbPages, :image)"; 
@@ -57,6 +61,20 @@ class LivreManager extends Model {
             // recupere l'info de la derniere insertion en DB 
             $livre = new Livre($this->getBdd()->lastInsertId(), $titre, $nbPages, $image); 
             $this->ajoutLivre(($livre)); 
+        }
+    }
+
+
+    public function supprimerLivreBdd($id) {
+        $req = "DELETE FROM livres WHERE id = :id"; 
+        $stmt = $this->getBdd()->prepare($req); 
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $resultat = $stmt->execute(); 
+        $stmt->closeCursor(); 
+
+        if($resultat > 0) {
+            $livre = $this->getLivreById($id); 
+            unset($livre); 
         }
     }
  
