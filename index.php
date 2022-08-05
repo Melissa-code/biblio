@@ -1,4 +1,6 @@
 <?php
+define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http")."://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]")); 
+
 require_once("controllers/LivreController.php");
 $livreController = new LivreController;
 
@@ -6,12 +8,33 @@ if(empty($_GET['page'])){
     require("views/accueilView.php"); 
 }
 else {
+    // décompose l'url 
+    $url = explode("/", filter_var($_GET['page']), FILTER_SANITIZE_URL); 
+    // echo '<pre>'; print_r($url); echo '</pre>';
+
     // name host/biblio/index.php?page=
-    switch($_GET['page']){
+    switch($url[0]){
         case "accueil": require("views/accueilView.php"); 
         break;
-        case "livres": $livreController->afficherLivres();
+        case "livres": 
+            // $url[0] c'est accueil ou livres $url[1] c'est l a m ou s
+            if(empty($url[1])){
+                $livreController->afficherLivres();
+            } else if($url[1] === "l") {
+                $livreController->afficherLivre($url[2]);
+            } else if($url[1] === "a") {
+                $livreController->ajoutLivre();
+            } else if($url[1] === "m") {
+                echo "modifier un livre"; 
+            } else if($url[1] === "s") {
+                echo "supprimer un livre"; 
+            } else if($url[1] === "av") {
+                $livreController->ajoutLivreValidation(); 
+            } 
+            else {
+                throw new Exception("La page n'existe pas.");  
+            }
         break;
-
+        default : throw new Exception("La page n'existe pas."); 
     }
 }

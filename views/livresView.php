@@ -1,12 +1,8 @@
 <?php 
 
-
 require_once("controllers/LivreController.php"); 
-
-//$livreManager = new LivreManager();
-// $livreManager->chargementLivres();
-
 ob_start(); ?> 
+
 
 <!-- Tableau des livres --> 
 <table class="table table-hover text-center border border-success">
@@ -24,21 +20,26 @@ ob_start(); ?>
         <!-- Contenu des colonnes  --> 
     <?php 
 
-    foreach($livres as $livre) : ?>
+    for($i=0; $i < count($livres); $i++): ?>
         <tr class="table-light">
-            <td class="align-middle"><img src="./public/images/<?= $livre->getImage() ?>" alt="l'algo" width="60px"></td>
-            <td class="align-middle"><?= $livre->getTitre() ?></td>
-            <td class="align-middle"><?= $livre->getNbPages() ?></td>
+            <td class="align-middle"><img src="public/images/<?= $livres[$i]->getImage() ?>" alt="l'algo" width="60px"></td>
+            <td class="align-middle"><a href="<?= URL ?>livres/l/<?= $livres[$i]->getId() ?>"><?= $livres[$i]->getTitre() ?></a></td>
+            <td class="align-middle"><?= $livres[$i]->getNbPages() ?></td>
+            <!-- modifier -->
             <td class="align-middle"><a href="#" class="btn btn-warning">Modifier</a></td>
-            <td class="align-middle"><a href="#" class="btn btn-danger">Supprimer</a></td>
+            <!-- supprimer -->
+            <td class="align-middle">
+                
+                <a href="#" class="btn btn-danger">Supprimer</a>
+            </td>
         </tr>
-    <?php endforeach ?>
+    <?php endfor ?>
 
     </tbody>
 </table>
 
 <!-- Bouton ajouter livre --> 
-<a href="#" class="btn btn-secondary d-block">Ajouter</a>
+<a href="<?= URL ?>livres/a" class="btn btn-secondary d-block">Ajouter</a>
 
 
 <?php 
