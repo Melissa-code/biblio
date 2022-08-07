@@ -29,12 +29,16 @@ class LivreController {
     }
 
 
-    public function supprimerLivre($id) {
-        $nomImage = $this->livreManager->getLivreById($id)->getImage(); 
+    public function supprimerLivre(string $id) {
+        $nomImage = $this->livreManager->getLivreById($id)->getImage();
+        //var_dump("nom image: ".$nomImage); 
+         
         // suppression de l'image dans le répertoire 
         unlink("public/images/".$nomImage); 
+
         //suppression de l'image en DB 
         $this->livreManager->supprimerLivreBdd($id);
+        
         header('location:'.URL."livres");
     }
 

@@ -9,7 +9,7 @@ class LivreManager extends Model {
     private array $livres;
 
 
-    public function ajoutLivre($livre) {
+    public function ajoutLivre(Livre $livre) {
         $this->livres[] = $livre;
     }
 
@@ -35,7 +35,7 @@ class LivreManager extends Model {
     }
 
 
-    public function getLivreById($id){
+    public function getLivreById(string $id) {
         //var_dump($id);
         for($i=0; $i < count($this->livres);$i++){
             //var_dump($this->livres[$i]->getId());
@@ -47,7 +47,7 @@ class LivreManager extends Model {
     }
 
 
-    public function ajoutLivreBdd($titre, $nbPages, $image) {
+    public function ajoutLivreBdd(string $titre, int $nbPages, string $image) {
         $req = "INSERT INTO livres (titre, nbPages, image) VALUES (:titre, :nbPages, :image)"; 
         $stmt = $this->getBdd()->prepare($req); 
         $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
@@ -65,16 +65,18 @@ class LivreManager extends Model {
     }
 
 
-    public function supprimerLivreBdd($id) {
+    public function supprimerLivreBdd(string $id) {
         $req = "DELETE FROM livres WHERE id = :id"; 
         $stmt = $this->getBdd()->prepare($req); 
-        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->bindValue(":id", (int)base64_decode(urldecode($id)), PDO::PARAM_INT);
         $resultat = $stmt->execute(); 
+        //var_dump($id); 
+        //var_dump($resultat);//$resultat bool(true)
         $stmt->closeCursor(); 
 
         if($resultat > 0) {
-            $livre = $this->getLivreById($id); 
-            unset($livre); 
+            $livre = $this->getLivreById($id);
+            unset($livre); // detruit une variable 
         }
     }
  

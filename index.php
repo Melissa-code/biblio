@@ -27,7 +27,7 @@ else {
             } else if($url[1] === "m") {
                 echo "modifier un livre"; 
             } else if($url[1] === "s") {
-                // echo $url['2']; 
+                //echo $url['2']; 
                 $livreController->supprimerLivre($url[2]);
             } else if($url[1] === "av") {
                 $livreController->ajoutLivreValidation(); 

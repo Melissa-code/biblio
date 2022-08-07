@@ -32,7 +32,7 @@ ob_start(); ?>
             <!-- supprimer -->
             <td class="align-middle">
                 <!-- onsubmit : confirmation JS  -->
-                <form method="POST" action="<?= URL ?>livres/s/<?= $livres[$i]->getId() ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?'); ">
+                <form method="POST" action="<?= URL ?>livres/s/<?= urlencode(base64_encode($livres[$i]->getId())) ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?'); ">
                     <button class="btn btn-danger" type="submit">Supprimer</button>
                 </form>
             </td>
