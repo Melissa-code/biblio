@@ -4,12 +4,12 @@ ob_start();
 
 <form action="<?= URL?>livres/av" method="POST" enctype="multipart/form-data">
     <!-- Titre --> 
-    <div class="mb-3">
+    <div class="form-group mb-3">
         <label for="titre" class="form-label">Titre : </label>
         <input type="text" class="form-control" id="titre" name="titre">
     </div>
     <!-- nbPages --> 
-    <div class="mb-3">
+    <div class="form-group mb-3">
         <label for="nbPages" class="form-label">Nombre de pages : </label>
         <input type="number" class="form-control" id="nbPages" name="nbPages">
     </div>

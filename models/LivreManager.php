@@ -81,4 +81,23 @@ class LivreManager extends Model {
     }
  
 
+    public function modificationLivreBdd(string $id, string $titre, int $nbPages, string $image) {
+        $req = "UPDATE livres 
+        SET titre = :titre, nbPages = :nbPages, image = :image
+        WHERE id = :id" ; 
+        $stmt = $this->getBdd()->prepare($req); 
+        $stmt->bindValue(":id", (int)base64_decode(urldecode($id)), PDO::PARAM_INT);
+        $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
+        $stmt->bindValue(":nbPages", $nbPages, PDO::PARAM_INT);
+        $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+        $resultat = $stmt->execute(); 
+        $stmt->closeCursor(); 
+
+        if($resultat > 0) {
+            $this->getLivreById($id)->setTitre($titre); 
+            $this->getLivreById($id)->setnbPages($nbPages); 
+            $this->getLivreById($id)->setImage($image); 
+        }
+    }
+
 }

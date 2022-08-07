@@ -27,7 +27,11 @@ ob_start(); ?>
             <td class="align-middle"><?= $livres[$i]->getNbPages() ?></td>
            
             <!-- modifier -->
-            <td class="align-middle"><a href="#" class="btn btn-warning">Modifier</a></td>
+            <td class="align-middle">
+                <form method="POST" action="<?= URL ?>livres/m/<?= urlencode(base64_encode($livres[$i]->getId())) ?>">
+                    <button class="btn btn-warning" type="submit">Modifier</button>
+                </form>
+            </td>
             
             <!-- supprimer -->
             <td class="align-middle">

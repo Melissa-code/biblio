@@ -21,7 +21,7 @@ class LivreController {
     }
 
 
-    public function afficherLivre($id){
+    public function afficherLivre(string $id){
         $livre = $this->livreManager->getLivreById($id);
         //var_dump($livre); 
         //var_dump($id); 
@@ -29,16 +29,38 @@ class LivreController {
     }
 
 
+    public function modifierLivre(string $id) {
+        $livre = $this->livreManager->getLivreByID($id); 
+        require("views/modifierLivreView.php"); 
+    }
+
+    public function modifierLivreValidation() {
+        $imageActuelle = $this->livreManager->getLivreById($_POST['identifiant'])->getImage(); 
+        var_dump($imageActuelle); 
+        $file = $_FILES['image']; // image du form 
+
+        if($file['size'] > 0){
+            // l'utilisateur veut changer l'image
+            unlink("public/images/".$imageActuelle); 
+            // ajout du livre dans le repertoire
+            $repertoire = "public/images/"; 
+            $nomImageAjoute = $this->ajoutImage($file, $repertoire); 
+        } else {
+            $nomImageAjoute = $imageActuelle; 
+        }
+
+        $this->livreManager->modificationLivreBdd($_POST['identifiant'], $_POST['titre'], $_POST['nbPages'], $nomImageAjoute);
+        header('location:'.URL."livres");
+    } 
+
+
     public function supprimerLivre(string $id) {
         $nomImage = $this->livreManager->getLivreById($id)->getImage();
         //var_dump("nom image: ".$nomImage); 
-         
         // suppression de l'image dans le répertoire 
         unlink("public/images/".$nomImage); 
-
         //suppression de l'image en DB 
         $this->livreManager->supprimerLivreBdd($id);
-        
         header('location:'.URL."livres");
     }
 
