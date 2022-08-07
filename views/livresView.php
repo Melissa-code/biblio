@@ -1,7 +1,16 @@
 <?php 
+//require_once("controllers/LivreController.php"); 
 
-require_once("controllers/LivreController.php"); 
-ob_start(); ?> 
+ob_start(); 
+
+if(!empty($_SESSION['alert'])): ?> 
+    <div class="alert alert-<?= $_SESSION['alert']['type'] ?> text-danger text-center text-uppercase" role="alert">
+        <?= $_SESSION['alert']['msg'] ?>
+    </div>
+<?php 
+// on vide la variable de session 
+unset($_SESSION['alert']); 
+endif; ?>
 
 
 <!-- Tableau des livres --> 

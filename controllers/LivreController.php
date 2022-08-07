@@ -4,7 +4,7 @@ require_once("models/LivreManager.php");
 
 class LivreController {
 
-    private $livreManager; 
+    private LivreManager $livreManager; 
 
 
     public function __construct() {
@@ -48,8 +48,13 @@ class LivreController {
         } else {
             $nomImageAjoute = $imageActuelle; 
         }
-
         $this->livreManager->modificationLivreBdd($_POST['identifiant'], $_POST['titre'], $_POST['nbPages'], $nomImageAjoute);
+       
+        $_SESSION['alert'] = [
+            "type" => "success", 
+            "msg" => "Modification du livre bien enregistrée"
+        ]; 
+
         header('location:'.URL."livres");
     } 
 
@@ -61,6 +66,12 @@ class LivreController {
         unlink("public/images/".$nomImage); 
         //suppression de l'image en DB 
         $this->livreManager->supprimerLivreBdd($id);
+
+        $_SESSION['alert'] = [
+            "type" => "success", 
+            "msg" => "Suppression du livre bien réalisée"
+        ]; 
+
         header('location:'.URL."livres");
     }
 
@@ -78,6 +89,12 @@ class LivreController {
         $nomImageAjoute = $this->ajoutImage($file, $repertoire); 
         // ajout image en BDD 
         $this->livreManager->ajoutLivreBdd($_POST['titre'], $_POST['nbPages'], $nomImageAjoute); 
+        
+        $_SESSION['alert'] = [
+            "type" => "success", 
+            "msg" => "Ajout du livre bien effectué"
+        ]; 
+
         header('location:'.URL."livres");
     }
 

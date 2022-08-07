@@ -1,7 +1,7 @@
 <?php ob_start(); ?> 
 
 <!-- enctyope pour télécharger l'image -->
-<form action="<?= URL?>livres/mv" method="POST" enctype="multipart/form-data">
+<form action="<?= URL?>livres/mv" method="POST" enctype="multipart/form-data" class="d-flex flex-column mx-5">
     <!-- Titre --> 
     <div class="form-group mb-3">
         <label for="titre" class="form-label">Titre : </label>
@@ -25,7 +25,7 @@
         <input type="hidden" name="identifiant" value="<?= urlencode(base64_encode($livre->getId())) ?> ">
     </div>
     <!-- bouton --> 
-    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button type="submit" class="btn btn-secondary">Modifier</button>
 </form>
 
 

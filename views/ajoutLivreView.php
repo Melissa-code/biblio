@@ -2,7 +2,7 @@
 ob_start(); 
 ?> 
 
-<form action="<?= URL?>livres/av" method="POST" enctype="multipart/form-data">
+<form action="<?= URL?>livres/av" method="POST" enctype="multipart/form-data" class="d-flex flex-column mx-5">
     <!-- Titre --> 
     <div class="form-group mb-3">
         <label for="titre" class="form-label">Titre : </label>
@@ -19,7 +19,7 @@ ob_start();
         <input type="file" class="form-control-file" id="image" name="image">
     </div>
     <!-- bouton --> 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <button type="submit" class="btn btn-secondary">Enregistrer</button>
 </form>
 
 
