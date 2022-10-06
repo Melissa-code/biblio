@@ -47,5 +47,5 @@ try {
 }
 catch(Exception $e) {
     $msg = $e->getMessage();
-    require("views/error.php"); 
+    require("views/errorsView.php"); 
 }

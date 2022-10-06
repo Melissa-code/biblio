@@ -37,7 +37,7 @@ class LivreManager extends Model {
 
     public function getLivreById(string $id) {
         //var_dump($id);
-        for($i=0; $i < count($this->livres);$i++){
+        for($i=0; $i < count($this->livres); $i++){
             //var_dump($this->livres[$i]->getId());
             if($this->livres[$i]->getId() === (int)base64_decode(urldecode($id))){
                 //var_dump($this->livres[$i]);
