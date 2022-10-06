@@ -11,7 +11,7 @@ abstract class Model {
     private function setBdd() {
        
         //if(getenv('JAWSDB_URL') !== false) {
-        if(getenv('mysql://g0min2f28hpaf034:j1uaikuc0yc1dmhp@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c1mw353kqbgkri8u') !== false) {
+        if(getenv('JAWSDB_URL') !== false) {
             $dbparts = parse_url('JAWSDB_URL');
 
             $hostname = $dbparts['host'];
