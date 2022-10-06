@@ -7,23 +7,31 @@ abstract class Model {
 
     private function setBdd() {
        
+        //$url = getenv('mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd');
         //if(getenv('JAWSDB_URL') !== false) {
-            $url = getenv('mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd');
-        if($url !== false) {
-            $dbparts = parse_url($url);
+        // if($url) {
+        //     $dbparts = parse_url($url);
 
-            $hostname = $dbparts['host'];
-            $username = $dbparts['user'];
-            $password = $dbparts['pass'];
-            $database = ltrim($dbparts['path'],'/');
-        }
-        else {
-            $hostname = 'localhost';
-            $username = 'melissa';
-            $password = 'melissa'; 
-            $database = 'my_library';
-          
-        }
+        //     $hostname = $dbparts['host'];
+        //     $username = $dbparts['user'];
+        //     $password = $dbparts['pass'];
+        //     $database = ltrim($dbparts['path'],'/');
+        // }
+        // else {
+        //     $hostname = 'localhost';
+        //     $username = 'melissa';
+        //     $password = 'melissa'; 
+        //     $database = 'my_library';
+        // }
+
+        $url = getenv('mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd');
+        $dbparts = parse_url($url);
+
+        $hostname = $dbparts['host'];
+        $username = $dbparts['user'];
+        $password = $dbparts['pass'];
+        $database = ltrim($dbparts['path'],'/');
+
 
         try {
             self::$pdo = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
