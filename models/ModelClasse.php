@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 // seules les classes filles seront instanciées
 abstract class Model {
 
@@ -11,8 +8,9 @@ abstract class Model {
     private function setBdd() {
        
         //if(getenv('JAWSDB_URL') !== false) {
-        if(getenv('JAWSDB_URL') !== false) {
-            $dbparts = parse_url('JAWSDB_URL');
+            $jaswsdb = 'mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd';
+        if(getenv($jaswsdb) !== false) {
+            $dbparts = parse_url($jaswsdb);
 
             $hostname = $dbparts['host'];
             $username = $dbparts['user'];
@@ -24,7 +22,7 @@ abstract class Model {
             $username = 'melissa';
             $password = 'melissa'; 
             $database = 'my_library';
-            $hostname = 'localhost'; 
+          
         }
 
         try {
