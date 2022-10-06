@@ -8,9 +8,9 @@ abstract class Model {
     private function setBdd() {
        
         //if(getenv('JAWSDB_URL') !== false) {
-            $jaswsdb = 'mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd';
-        if(getenv($jaswsdb) !== false) {
-            $dbparts = parse_url($jaswsdb);
+            $url = getenv('mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd');
+        if($url !== false) {
+            $dbparts = parse_url($url);
 
             $hostname = $dbparts['host'];
             $username = $dbparts['user'];
