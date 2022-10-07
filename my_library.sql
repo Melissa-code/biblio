@@ -7,7 +7,7 @@
 -- Version du serveur :  5.7.32
 -- Version de PHP : 7.4.12
 
-USE ivr0m1c3970mqxnd;
+-- USE ivr0m1c3970mqxnd;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";

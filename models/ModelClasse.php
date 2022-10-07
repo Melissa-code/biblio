@@ -7,8 +7,8 @@ abstract class Model {
 
     private function setBdd() {
        
-        $url = getenv('mysql://m06nyqahlwtrn6lg:napg0r77g9015zve@au77784bkjx6ipju.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ivr0m1c3970mqxnd');
-        //if(getenv('JAWSDB_URL') !== false) {
+        $url = getenv('JAWSDB_URL');
+
         if($url) {
             $dbparts = parse_url($url);
 
@@ -24,11 +24,8 @@ abstract class Model {
             $database = 'my_library';
         }
 
-       
-
-
         try {
-            self::$pdo = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
+            self::$pdo = new PDO("mysql:host=$hostname;dbname=$database;charset=utf8", $username, $password);
             // set the PDO error mode to exception
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "Connected successfully";
@@ -39,6 +36,7 @@ abstract class Model {
             }
     }
 
+    
     protected function getBdd() {
         if(self::$pdo === null){
             self::setBdd();
